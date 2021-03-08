@@ -20,6 +20,30 @@ class IrtsController extends Controller
 
         $students = Students::orderBy('ner', 'asc')->get();
 
+        $data = array();
+
+        $activeMenu = activeMenu($pageName);
+
+        return view('teacher/pages/'.$pageName.'/index', [
+            'first_page_name' => $activeMenu['first_page_name'],
+            'page_title' => $pageTitle,
+            'page_name' => $pageName,
+            'students' => $students,
+            'data' => $data,
+            'user' => Auth::guard('teacher')->user()
+        ]);
+    }
+
+    public function save(Request $request) 
+    {
+        redirect()->route('teacher-irts')->with('success', 'Ирц амжилттай бүртгэгдлээ!');
+    }
+
+    public function result()
+    {
+        $pageTitle = 'Ирц, явцын дүн';
+        $pageName = 'irts';
+
         $activeMenu = activeMenu($pageName);
 
         return view('teacher/pages/'.$pageName.'/index', [
