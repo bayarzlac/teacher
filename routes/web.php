@@ -8,9 +8,10 @@ use App\Http\Controllers\Teacher\TeacherController;
 
 use App\Http\Controllers\Teacher\TeachersController;
 use App\Http\Controllers\Teacher\StudentsController;
-use App\Http\Controllers\Teacher\AngiController;
+
 use App\Http\Controllers\Teacher\HicheelController;
 use App\Http\Controllers\Teacher\HuvaariController;
+use App\Http\Controllers\Teacher\IrtsController;
 use App\Http\Controllers\Teacher\MergejilController;
 use App\Http\Controllers\Teacher\MergejilBagshController;
 use App\Http\Controllers\Teacher\TenhimController;
@@ -71,6 +72,7 @@ Route::group(['prefix' => 'teacher','middleware' => 'teacherauth'], function () 
 
 	// irts, yavtsiin dun
 	Route::get('irts', [IrtsController::class, 'index'])->name('teacher-irts');
+
 
 	// Settings
 	Route::get('settings',[SettingsController::class, 'index'])->name('teacher-settings');

@@ -8,12 +8,14 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
-class IrtsController extends Controller 
+class IrtsController extends Controller
 {
-    public function index () 
+    public function index()
     {
-        $pageTitle = 'Оюутны ирц, явцын дүн';
+        $pageTitle = 'Ирц, явцын дүн';
         $pageName = 'irts';
+
+        
 
         $activeMenu = activeMenu($pageName);
 
