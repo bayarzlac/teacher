@@ -8,6 +8,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Students;
+use App\Models\Angi;
+
 class IrtsController extends Controller
 {
     public function index()
@@ -15,7 +18,7 @@ class IrtsController extends Controller
         $pageTitle = 'Ирц, явцын дүн';
         $pageName = 'irts';
 
-        
+        $students = Students::orderBy('ner', 'asc')->get();
 
         $activeMenu = activeMenu($pageName);
 
