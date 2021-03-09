@@ -1,17 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\app\\Http\\Controllers\\Teacher",
+    "\\database",
+    "\\database\\seeders",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\teacher",
     "\\resources\\views\\teacher\\pages",
-    "\\resources\\views\\teacher\\pages\\hicheel",
-    "\\resources\\views\\teacher\\pages\\irts"
+    "\\resources\\views\\teacher\\pages\\huvaari",
+    "\\resources\\views\\teacher\\pages\\irts",
+    "\\resources\\views\\teacher\\pages\\students"
   ],
-  "SelectedNode": "\\routes\\web.php",
+  "SelectedNode": "\\resources\\views\\teacher\\pages\\irts\\index.blade.php",
   "PreviewInSolutionExplorer": false
 }

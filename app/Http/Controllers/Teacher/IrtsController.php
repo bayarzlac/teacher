@@ -18,9 +18,8 @@ class IrtsController extends Controller
         $pageTitle = 'Ирц, явцын дүн';
         $pageName = 'irts';
 
-        $students = Students::orderBy('ner', 'asc')->get();
-
-        $data = array();
+        $angi = Angi::orderBy('ner', 'asc')->get();
+        $students = Students::where('a_id', 2)->orderBy('ner', 'asc')->get();
 
         $activeMenu = activeMenu($pageName);
 
@@ -28,8 +27,8 @@ class IrtsController extends Controller
             'first_page_name' => $activeMenu['first_page_name'],
             'page_title' => $pageTitle,
             'page_name' => $pageName,
-            'students' => $students,
-            'data' => $data,
+            'angis' => $angi,
+            'students' => $students,            
             'user' => Auth::guard('teacher')->user()
         ]);
     }

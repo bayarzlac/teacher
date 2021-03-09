@@ -6,26 +6,44 @@
             <i data-feather="alert-triangle" class="w-6 h-6 mr-2"></i> {!! \Session::get('success') !!}
         </div>
     @endif
-    <h2 class="intro-y text-lg font-medium mt-10">{{ $page_title }} талбар</h2>
 
-    <div class="grid grid-cols-12 gap-6 mt-5">
-        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-            @if (!$students) 
-                <div class="rounded-md flex items-center px-5 py-4 mb-2 mt-2 bg-theme-17 text-theme-11">
-                    <i data-feather="alert-triangle" class="w-6 h-6 mr-2"></i> Мэдээлэл алга байна!
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+        <h2 class="text-lg font-medium mr-auto">Ирц, явцын дүн</h2>
+    </div>
+    <!-- BEGIN: HTML Table Data -->
+    <div class="intro-y box p-5 mt-5">
+        <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
+            <div class="sm:flex items-center sm:mr-4">
+                    <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Орох анги</label>
+
+                    <select class="input w-full sm:w-32 xxl:w-full mt-2 sm:mt-0 sm:w-auto border" name="aid">
+                        <option value="">--Сонгох--</option>
+                        @foreach ($angis as angi)
+                            <option value="{{ $angi->id }}">{{ $angi->tovch }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            @else
-                <form class="validate-form-teacher" action="{{ route('teacher-irts-save') }}" method="post" enctype="multipart/form-data">
-                    <table id="table" class="table table-report mt-2">
-                        <thead>
-                            <tr>
-                                <td>Оюутны нэр</td>
-                                <td>Хичээлд суусан эсэх</td>
-                                <td>Явцын дүн</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($students as $student)
+                <div class="mt-2 xl:mt-0">
+                    <button type="button" class="button w-full sm:w-28 bg-theme-1 text-white" id="tabulator-html-filter-go">Хайлт хийх</button>
+                </div>
+        </div>
+
+        @if (!$students)
+            <div class="rounded-md flex items-center px-5 py-4 mb-2 mt-2 bg-theme-17 text-theme-11">
+                <i data-feather="alert-triangle" class="w-6 h-6 mr-2"></i> Анги сонгоогүй байна!
+            </div>
+        @else
+            <form class="validate-form-teacher" action="{{ route('teacher-irts-save') }}" method="post" enctype="multipart/form-data">
+                <table id="table" class="table table-report mt-2">
+                    <thead>
+                        <tr>
+                            <td>Оюутны нэр</td>
+                            <td>Хичээлд суусан эсэх</td>
+                            <td>Явцын дүн</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($students as $student)
                             <tr>
                                 <td>
                                     {{ $student->ovog }} - {{ $student->ner }}
@@ -37,17 +55,16 @@
                                     <input type="text" name="" value="0" class="input w-full border mt-2" />
                                 </td>
                             </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="flex justify-end mt-4">
-                        <button type="submit" name="action" value="save" class="button w-40 bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
-                    </div>
-                </form>
-                
-            @endif
-        </div>
+                        @endforeach
+                    </tbody>
+                </table>
+                <div class="flex justify-end mt-4">
+                    <button type="submit" name="action" value="save" class="button w-40 bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
+                </div>
+            </form>
+        @endif        
     </div>
+    <!-- END: HTML Table Data -->
 @endsection
 
 @section('style')
