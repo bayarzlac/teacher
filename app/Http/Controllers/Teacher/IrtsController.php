@@ -13,13 +13,13 @@ use App\Models\Angi;
 
 class IrtsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $pageTitle = 'Ирц, явцын дүн';
         $pageName = 'irts';
 
         $angi = Angi::orderBy('ner', 'asc')->get();
-        $students = Students::where('a_id', 2)->orderBy('ner', 'asc')->get();
+        $students = Students::where('a_id', $request->get("a_id"))->orderBy('ner', 'asc')->get();
 
         $activeMenu = activeMenu($pageName);
 
@@ -35,7 +35,25 @@ class IrtsController extends Controller
 
     public function save(Request $request) 
     {
-        redirect()->route('teacher-irts')->with('success', 'Ирц амжилттай бүртгэгдлээ!');
+        for ($i = 0; $i < count($request->sid); $i += 1)
+        {
+            
+        }
+
+        
+        switch ($request->input('action')) {
+            case 'save':
+                return redirect()->route('teacher-irts')->with('a_id', $request->a_id)->with('success', 'Оюутан амжилттай нэмэгдлээ!'); 
+                break;
+    
+            case 'save_and_new':
+                return back()->with('success', 'Оюутан амжилттай нэмэгдлээ!');
+                break;
+    
+            case 'preview':
+                echo 'preview';
+                break;
+        }
     }
 
     public function result()
