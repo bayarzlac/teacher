@@ -37,7 +37,7 @@
         </form>
         
 
-        @if (!count($students))
+        @if (!count($irts))
             <div class="rounded-md flex items-center px-5 py-4 mb-2 mt-2 bg-theme-17 text-theme-11">
                 <i data-feather="alert-triangle" class="w-6 h-6 mr-2"></i> Анги сонгоогүй эсвэл сонгосон ангид оюутан бүртгэгдээгүй!
             </div>
@@ -53,25 +53,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($students as $student)
+                        @foreach($irts as $ir)
                             <tr>
                                 <td>
                                     {{ $loop->index + 1 }}
                                 </td>
                                 <td>
-                                    {{ Str::substr($student->ovog, 0, 3) }}.{{ $student->ner }}
-                                    <input type="text" name="sid[]" value="{{ $student->id }}" hidden />
+                                    {{ Str::substr($ir->ovog, 0, 3) }}.{{ $ir->ner }}
+                                    <input type="text" name="id" value="{{ $ir->id }}" />
                                 </td>
                                 <td>
-                                    <input type="text" name="dun[]" value="0" class="input w-full border mt-2" />
+                                    <input type="text" name="status" value="{{ $ir->status }}" class="input w-full border mt-2" />
+
+                                    <!-- <div class="flex flex-col sm:flex-row mt-2">
+                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2"> 
+                                            <input type="radio" class="input border mr-2" id="status-1[]" name="status[]" value="1" />
+                                            <label class="cursor-pointer select-none" for="status-1[]">Ирсэн</label>
+                                        </div>
+                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
+                                            <input type="radio" class="input border mr-2" id="status-2[]" name="status[]" value="2" />
+                                            <label class="cursor-pointer select-none" for="status-2[]">Өвчтэй</label>
+                                        </div>
+                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
+                                            <input type="radio" class="input border mr-2" id="status-3[]" name="status[]" value="3" />
+                                            <label class="cursor-pointer select-none" for="status-3[]">Чөлөөтэй</label>
+                                        </div>
+                                    </div> -->
                                 </td>
                                 <td>
-                                    <input type="text" name="irts[]" value="0" class="input w-full border mt-2" />
+                                    <input type="text" name="s_id" value="0" class="input w-full border mt-2" />
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <p>
+                    {{ $irts }}
+                </p>
                 <div class="flex justify-end mt-4">
                     <button type="submit" name="action" value="save" class="button w-40 bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
                 </div>

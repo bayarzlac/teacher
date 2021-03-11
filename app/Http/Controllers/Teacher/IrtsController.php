@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Students;
 use App\Models\Angi;
+use App\Models\Irts;
 
 class IrtsController extends Controller
 {
@@ -19,7 +20,17 @@ class IrtsController extends Controller
         $pageName = 'irts';
 
         $angi = Angi::orderBy('ner', 'asc')->get();
-        $students = Students::where('a_id', $request->get("a_id"))->orderBy('ner', 'asc')->get();
+        //$students = Students::where('a_id', $request->get("a_id"))->orderBy('ner', 'asc')->get();
+
+        $irts = Students::leftJoin('irts', 'students.id', '=', 'irts.s_id')->where('a_id', $request->get('a_id'))->get();
+
+        foreach ($irts as $ir) 
+        {
+            if ($ir->status == null) 
+            {
+                $ir->status = 1;
+            }
+        }
 
         $activeMenu = activeMenu($pageName);
 
@@ -28,14 +39,14 @@ class IrtsController extends Controller
             'page_title' => $pageTitle,
             'page_name' => $pageName,
             'angis' => $angi,
-            'students' => $students,            
+            'irts' => $irts,            
             'user' => Auth::guard('teacher')->user()
         ]);
     }
 
     public function save(Request $request) 
     {
-        for ($i = 0; $i < count($request->sid); $i += 1)
+        for ($i = 0; $i < count($request->data[]); $i += 1)
         {
             
         }
@@ -43,7 +54,7 @@ class IrtsController extends Controller
         
         switch ($request->input('action')) {
             case 'save':
-                return redirect()->route('teacher-irts')->with('a_id', $request->a_id)->with('success', 'Оюутан амжилттай нэмэгдлээ!'); 
+                return redirect()->route('teacher-irts')->with('a_id', $request->a_id)->with('success', 'yu yaasan'); 
                 break;
     
             case 'save_and_new':
