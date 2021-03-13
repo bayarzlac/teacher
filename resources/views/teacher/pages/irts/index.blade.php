@@ -53,38 +53,56 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($irts as $ir)
+                        @for ($i = 0; $i < count($irts); $i += 1)
                             <tr>
                                 <td>
-                                    {{ $loop->index + 1 }}
-                                </td>
+                                    {{ $i + 1 }}
+                                </td>    
                                 <td>
-                                    {{ Str::substr($ir->ovog, 0, 3) }}.{{ $ir->ner }}
-                                    <input type="text" name="id" value="{{ $ir->id }}" />
+                                    {{ Str::substr($irts[$i]->ovog, 0, 3) }}.{{ $irts[$i]->ner }}
+                                    <input type="text" name="id{{ $i }}" value="{{ $irts[$i]->id }}" class="input w-full border mt-2" />
                                 </td>
-                                <td>
-                                    <input type="text" name="status" value="{{ $ir->status }}" class="input w-full border mt-2" />
 
-                                    <!-- <div class="flex flex-col sm:flex-row mt-2">
-                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2"> 
-                                            <input type="radio" class="input border mr-2" id="status-1[]" name="status[]" value="1" />
-                                            <label class="cursor-pointer select-none" for="status-1[]">Ирсэн</label>
-                                        </div>
-                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
-                                            <input type="radio" class="input border mr-2" id="status-2[]" name="status[]" value="2" />
-                                            <label class="cursor-pointer select-none" for="status-2[]">Өвчтэй</label>
-                                        </div>
-                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
-                                            <input type="radio" class="input border mr-2" id="status-3[]" name="status[]" value="3" />
-                                            <label class="cursor-pointer select-none" for="status-3[]">Чөлөөтэй</label>
-                                        </div>
-                                    </div> -->
-                                </td>
                                 <td>
-                                    <input type="text" name="s_id" value="0" class="input w-full border mt-2" />
+                                    <div class="flex flex-col sm:flex-row mt-2">
+                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2"> 
+                                            <label class="cursor-pointer select-none">
+                                                @if ($irts[$i]->status == 1)
+                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" checked />
+                                                @else
+                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" />
+                                                @endif
+                                                Ирсэн
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
+                                            <label class="cursor-pointer select-none">
+                                                @if ($irts[$i]->status == 2)
+                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" checked />
+                                                @else
+                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" />
+                                                @endif
+                                                Өвчтэй
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
+                                            <label class="cursor-pointer select-none">
+                                                @if ($irts[$i]->status == 3)
+                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" checked />
+                                                @else
+                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" />
+                                                @endif
+                                                Чөлөөтэй
+                                            </label>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td>
+                                    <input type="text" name="dun{{ $i }}" class="input w-full border mt-2" value="{{ $irts->dun }}" />
                                 </td>
                             </tr>
-                        @endforeach
+                        @endfor
                     </tbody>
                 </table>
                 <p>
