@@ -14,6 +14,7 @@ class Irts extends Model
         's_id',
         'day',
         'h_id',
-        'status'
+        'status',
+        'dun'
     ];
 }

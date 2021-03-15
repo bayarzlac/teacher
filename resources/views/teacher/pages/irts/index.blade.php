@@ -28,7 +28,10 @@
                     </select>
                 </div>
                 <div class="relative w-56 mx-auto">
-                    <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> <i data-feather="calendar" class="w-4 h-4"></i> </div> <input type="text" class="datepicker input pl-12 border" data-single-mode="true">
+                    <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> 
+                        <i data-feather="calendar" class="w-4 h-4"></i> 
+                    </div>
+                    <input type="text" class="datepicker input pl-12 border" data-single-mode="true" name="day" />
                 </div>
                 <div class="mt-2 xl:mt-0">
                     <button type="submit" class="button w-full sm:w-28 bg-theme-1 text-white">Хайлт хийх</button>
@@ -43,6 +46,7 @@
             </div>
         @else
             <form class="validate-form-teacher" action="{{ route('teacher-irts-save') }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <table id="table" class="table table-report mt-2">
                     <thead>
                         <tr>
@@ -53,14 +57,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for ($i = 0; $i < count($irts); $i += 1)
+                        @for ($i = 0; $i < count($irts); $i++)
                             <tr>
                                 <td>
                                     {{ $i + 1 }}
                                 </td>    
                                 <td>
                                     {{ Str::substr($irts[$i]->ovog, 0, 3) }}.{{ $irts[$i]->ner }}
-                                    <input type="text" name="id{{ $i }}" value="{{ $irts[$i]->id }}" class="input w-full border mt-2" />
+                                    <input type="text" name="s_id[{{ $i }}]" value="{{ $irts[$i]->id }}" />
                                 </td>
 
                                 <td>
@@ -68,9 +72,9 @@
                                         <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2"> 
                                             <label class="cursor-pointer select-none">
                                                 @if ($irts[$i]->status == 1)
-                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" checked />
+                                                    <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="1" checked />
                                                 @else
-                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" />
+                                                    <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="1" />
                                                 @endif
                                                 Ирсэн
                                             </label>
@@ -78,28 +82,38 @@
                                         <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
                                             <label class="cursor-pointer select-none">
                                                 @if ($irts[$i]->status == 2)
-                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" checked />
+                                                    <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="2" checked />
                                                 @else
-                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" />
+                                                    <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="2" />
                                                 @endif
-                                                Өвчтэй
+                                                Өвч.
                                             </label>
                                         </div>
                                         <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
                                             <label class="cursor-pointer select-none">
                                                 @if ($irts[$i]->status == 3)
-                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" checked />
+                                                    <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="3" checked />
                                                 @else
-                                                    <input type="radio" class="input border mr-2" name="st{{ $i }}" value="1" />
+                                                    <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="3" />
                                                 @endif
-                                                Чөлөөтэй
+                                                Чөл.
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
+                                            <label class="cursor-pointer select-none">
+                                                @if ($irts[$i]->status == 3)
+                                                    <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="4" checked />
+                                                @else
+                                                    <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="4" />
+                                                @endif
+                                                Тас.
                                             </label>
                                         </div>
                                     </div>
                                 </td>
                                 
                                 <td>
-                                    <input type="text" name="dun{{ $i }}" class="input w-full border mt-2" value="{{ $irts->dun }}" />
+                                    <input type="text" name="dun[{{ $i }}]" class="input w-full border mt-2" value="{{ $irts[$i]->dun }}" />
                                 </td>
                             </tr>
                         @endfor

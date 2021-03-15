@@ -75,7 +75,6 @@ Route::group(['prefix' => 'teacher','middleware' => 'teacherauth'], function () 
 
     Route::post('irts', [IrtsController::class, 'save'])->name('teacher-irts-save');
 
-
 	// Settings
 	Route::get('settings',[SettingsController::class, 'index'])->name('teacher-settings');
 	Route::get('settings/password',[SettingsController::class, 'password'])->name('teacher-settings-password');

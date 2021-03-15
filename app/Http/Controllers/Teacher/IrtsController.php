@@ -20,15 +20,21 @@ class IrtsController extends Controller
         $pageName = 'irts';
 
         $angi = Angi::orderBy('ner', 'asc')->get();
-        //$students = Students::where('a_id', $request->get("a_id"))->orderBy('ner', 'asc')->get();
 
-        $irts = Students::leftJoin('irts', 'students.id', '=', 'irts.s_id')->where('a_id', $request->get('a_id'))->get();
+        $irts = Students::leftJoin('irts', 'students.id', '=', 'irts.s_id')
+                ->where('a_id', $request->get('a_id'))
+                ->select('students.id', 'students.ovog', 'students.ner', 'irts.status', 'irts.dun')->get();
 
         foreach ($irts as $ir) 
         {
             if ($ir->status == null) 
             {
                 $ir->status = 1;
+            }
+
+            if ($ir->dun == null)
+            {
+                $ir->dun = 0;
             }
         }
 
@@ -46,19 +52,22 @@ class IrtsController extends Controller
 
     public function save(Request $request) 
     {
-        for ($i = 0; $i < count($request->data[]); $i += 1)
-        {
-            
-        }
 
+        for ($i = 0; $i < count($request->get("s_id")); $i++)
+        {
+            $newIrts = new Irts;
+            $newIrts->s_id = $request->get("s_id")[$i];
+            $newIrts->day = "2021-03-11";
+            $newIrts->h_id = 1;
+            $newIrts->status = $request->get("status")[$i];
+            $newIrts->dun = $request->get("dun")[$i];
+            
+            $newIrts->save();
+        }
         
         switch ($request->input('action')) {
             case 'save':
                 return redirect()->route('teacher-irts')->with('a_id', $request->a_id)->with('success', 'yu yaasan'); 
-                break;
-    
-            case 'save_and_new':
-                return back()->with('success', 'Оюутан амжилттай нэмэгдлээ!');
                 break;
     
             case 'preview':

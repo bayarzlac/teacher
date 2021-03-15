@@ -15,6 +15,11 @@ class CreateIrtsTable extends Migration
     {
         Schema::create('irts', function (Blueprint $table) {
             $table->id();
+            $table->mediumInteger('s_id');
+            $table->date('day');
+            $table->mediumInteger('h_id');
+            $table->mediumInteger('status');
+            $table->float('dun');
             $table->timestamps();
         });
     }
