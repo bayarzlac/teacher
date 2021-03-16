@@ -31,7 +31,13 @@
                     <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> 
                         <i data-feather="calendar" class="w-4 h-4"></i> 
                     </div>
-                    <input type="text" class="datepicker input pl-12 border" data-single-mode="true" name="day" />
+                    <!--<input type="text" name="day" class="input w-full border mt-2" placeholder="YYYY-MM-DD" required  />-->
+
+                    @if (request()->get('day'))
+                        <input type="text" class="datepicker input pl-12 border" data-single-mode="true" name="day" value="{{ request()->get('day') }}" />
+                    @else 
+                        <input type="text" class="datepicker input pl-12 border" data-single-mode="true" name="day" />
+                    @endif
                 </div>
                 <div class="mt-2 xl:mt-0">
                     <button type="submit" class="button w-full sm:w-28 bg-theme-1 text-white">Хайлт хийх</button>
@@ -119,9 +125,6 @@
                         @endfor
                     </tbody>
                 </table>
-                <p>
-                    {{ $irts }}
-                </p>
                 <div class="flex justify-end mt-4">
                     <button type="submit" name="action" value="save" class="button w-40 bg-theme-1 text-white ml-5">{{ __('site.save') }}</button>
                 </div>

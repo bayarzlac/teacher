@@ -20,20 +20,22 @@ class IrtsController extends Controller
         $pageName = 'irts';
 
         $angi = Angi::orderBy('ner', 'asc')->get();
+        
+        $day = $request->get("day");
 
-        $irts = Students::leftJoin('irts', 'students.id', '=', 'irts.s_id')
-                ->where('a_id', $request->get('a_id'))
+        $irts = Students::join('irts', 'students.id', '=', 'irts.s_id')
+                ->where('a_id', '=', $request->get('a_id'))
+                ->whereDate('day', '=', $day)
                 ->select('students.id', 'students.ovog', 'students.ner', 'irts.status', 'irts.dun')->get();
 
-        foreach ($irts as $ir) 
+        if (count($irts) == 0)
         {
-            if ($ir->status == null) 
+            $irts = Students::where('a_id', '=', $request->get('a_id'))
+                    ->select('students.id', 'students.ovog', 'students.ner')->get();
+
+            foreach ($irts as $ir) 
             {
                 $ir->status = 1;
-            }
-
-            if ($ir->dun == null)
-            {
                 $ir->dun = 0;
             }
         }
@@ -55,14 +57,22 @@ class IrtsController extends Controller
 
         for ($i = 0; $i < count($request->get("s_id")); $i++)
         {
-            $newIrts = new Irts;
-            $newIrts->s_id = $request->get("s_id")[$i];
-            $newIrts->day = "2021-03-11";
-            $newIrts->h_id = 1;
-            $newIrts->status = $request->get("status")[$i];
-            $newIrts->dun = $request->get("dun")[$i];
+            $exists = Irts::where('s_id', '=', $request->get("s_id")[$i])
+                ->whereDate('day', '=', $request->get("day"))->get();
+
+            if (count($exists))
+            {
+                $exists->delete();
+            }
+
+            // $newIrts = new Irts;
+            // $newIrts->s_id = $request->get("s_id")[$i];
+            // $newIrts->day = $request->get("day");
+            // $newIrts->h_id = 1;
+            // $newIrts->status = $request->get("status")[$i];
+            // $newIrts->dun = $request->get("dun")[$i];
             
-            $newIrts->save();
+            // $newIrts->save();
         }
         
         switch ($request->input('action')) {
