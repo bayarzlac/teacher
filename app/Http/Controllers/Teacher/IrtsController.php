@@ -53,16 +53,17 @@ class IrtsController extends Controller
         ]);
     }
 
-    public function save(Request $request) 
+    public function save(Request $request, $id) 
     {
+
         $day = $request->get("day");
 
         for ($i = 0; $i < count($request->get("s_id")); $i++)
         {
             $member = Irts::where('s_id', '=', $request->get("s_id")[$i])
-                ->whereDate('day', '=', $day)->get();
+                ->whereDate('day', '=', $day)->first();
 
-            if (count($member) > 0)
+            if ($member)
             {
                 $member->status = $request->get("status")[$i];
                 $member->dun = $request->get("dun")[$i];
@@ -83,7 +84,7 @@ class IrtsController extends Controller
         
         switch ($request->input('action')) {
             case 'save':
-                return redirect()->route('teacher-irts')->with('a_id', $request->get('a_id'))
+                return redirect()->route('teacher-irts', $id)->with('a_id', $request->get('a_id'))
                     ->with('day', $request->get('day'))
                     ->with('success', 'Ирцийн мэдээ хадгалагдлаа'); 
                 break;

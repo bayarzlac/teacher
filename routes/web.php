@@ -73,7 +73,7 @@ Route::group(['prefix' => 'teacher','middleware' => 'teacherauth'], function () 
 	// irts, yavtsiin dun
 	Route::get('irts', [IrtsController::class, 'index'])->name('teacher-irts');
 
-    Route::post('irts', [IrtsController::class, 'save'])->name('teacher-irts-save');
+    Route::post('irts/{id}', [IrtsController::class, 'save'])->name('teacher-irts-save');
 
 	// Settings
 	Route::get('settings',[SettingsController::class, 'index'])->name('teacher-settings');
