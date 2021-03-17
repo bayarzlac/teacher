@@ -12,7 +12,7 @@
     </div>
     <!-- BEGIN: HTML Table Data -->
     <div class="intro-y box p-5 mt-5">
-        <form action="{{ route('teacher-irts') }}" method="get">
+        <form action="{{ route('teacher-irts') }}" method="GET">
             <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
                 <div class="sm:flex items-center sm:mr-4">
                     <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Орох анги</label>
@@ -53,6 +53,8 @@
         @else
             <form class="validate-form-teacher" action="{{ route('teacher-irts-save') }}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="text" name="day" value="{{ $day }}" hidden />
+
                 <table id="table" class="table table-report mt-2">
                     <thead>
                         <tr>
@@ -107,7 +109,7 @@
                                         </div>
                                         <div class="flex items-center text-gray-700 dark:text-gray-500 mr-2 mt-2 sm:mt-0">
                                             <label class="cursor-pointer select-none">
-                                                @if ($irts[$i]->status == 3)
+                                                @if ($irts[$i]->status == 4)
                                                     <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="4" checked />
                                                 @else
                                                     <input type="radio" class="input border mr-2" name="status[{{ $i }}]" value="4" />
