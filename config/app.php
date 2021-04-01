@@ -91,15 +91,15 @@ return [
             'sub_menu' => [
                 'ehicheel' => [
                     'icon' => 'watch',
-                    'page_name' => 'ehicheel',
+                    'page_name' => 'hicheel',
                     'title' => 'Хичээл',
-                    'link' => '/teacher/students/add'
+                    'link' => '/teacher/hicheel'
                 ],
                 'edaalgavar' => [
                     'icon' => 'edit',
-                    'page_name' => 'edaalgavar',
+                    'page_name' => 'daalgavar',
                     'title' => 'Даалгавар',
-                    'link' => '/teacher/students'
+                    'link' => '/teacher/daalgavar'
                 ],
                 'eshalgalt' => [
                     'icon' => 'edit',

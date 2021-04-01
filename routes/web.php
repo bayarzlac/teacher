@@ -10,6 +10,9 @@ use App\Http\Controllers\Teacher\TeachersController;
 use App\Http\Controllers\Teacher\StudentsController;
 
 use App\Http\Controllers\Teacher\HicheelController;
+use App\Http\Controllers\Teacher\AguulgaController;
+use App\Http\Controllers\Teacher\DaalgavarController;
+
 use App\Http\Controllers\Teacher\HuvaariController;
 use App\Http\Controllers\Teacher\IrtsController;
 use App\Http\Controllers\Teacher\MergejilController;
@@ -72,8 +75,22 @@ Route::group(['prefix' => 'teacher','middleware' => 'teacherauth'], function () 
 
 	// irts, yavtsiin dun
 	Route::get('irts', [IrtsController::class, 'index'])->name('teacher-irts');
+    Route::post('irts', [IrtsController::class, 'save'])->name('teacher-irts-save');
 
-    Route::post('irts/{id}', [IrtsController::class, 'save'])->name('teacher-irts-save');
+	// Bagshiin hicheel
+	Route::get('hicheel', [HicheelController::class, 'index'])->name('teacher-hicheel');
+	
+	Route::get('aguulga/{id}', [AguulgaController::class, 'index'])->name('teacher-aguulga');
+	Route::get('aguulga/add/{id}', [AguulgaController::class, 'add'])->name('teacher-aguulga-add');
+	Route::get('aguulga/edit/{id}', [AguulgaController::class, 'edit'])->name('aguulga-edit');
+
+	Route::post('aguulga/add', [AguulgaController::class, 'store'])->name('teacher-aguulga-save');
+	Route::post('aguulga/edit/{id}', [AguulgaController::class, 'update'])->name('teacher-aguulga-update');
+
+	Route::get('daalgavar/{id}', [DaalgavarController::class, 'index'])->name('teacher-daalgavar');
+	Route::get('daalgavar/add/{id}', [DaalgavarController::class, 'add'])->name('teacher-daalgavar-add');
+
+	Route::post('daalgavar/add', [DaalgavarController::class, 'store'])->name('teacher-daalgavar-save');
 
 	// Settings
 	Route::get('settings',[SettingsController::class, 'index'])->name('teacher-settings');
