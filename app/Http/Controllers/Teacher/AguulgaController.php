@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\TsahimHicheel;
 use App\Models\Fond;
+use App\Models\Daalgavar;
 
 class AguulgaController extends Controller
 {
@@ -57,8 +58,8 @@ class AguulgaController extends Controller
 
         if ($request->hasFile('file'))
         {
-            $path = Storage::putFile('files', new File('/uploads/files'));
-        }
+            $path = $request->file('file')->store('uploads/' . strval($user->code));
+        }   
 
         $TsahimHicheel = new TsahimHicheel;
         $TsahimHicheel->sedev = $request->sedev;
@@ -129,5 +130,29 @@ class AguulgaController extends Controller
                 echo 'preview';
                 break;
         }
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        // $member = Daalgavar::where('ts_id', '=', $id)->get();
+
+        // if ($member) 
+        // {
+        //     $member->delete();
+        // }
+
+        $member = TashimHicheel::findOrFail($id);
+        
+        $member->delete();
+
+        return redirect()->route('students')->with('success', 'Сонгогдсон ауулга устгагдлаа!'); 
+    }
+
+    public function delete(Request $request)
+    {
+        $member = TsahimHicheel::findOrFail($request->get("ts_id"));
+        $member->delete();
+
+        return redirect()->route('manager-students')->with('success', 'Оюутан амжилттай устгалаа!'); 
     }
 }

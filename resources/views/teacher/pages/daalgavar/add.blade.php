@@ -14,20 +14,20 @@
         <div class="intro-y col-span-12 lg:col-span-6">
             <form class="validate-form-teacher" action="{{ route('teacher-daalgavar-save') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="f_id" value="{{ request()->route('id') }}" />
+                <input type="hidden" name="ts_id" value="{{ request()->route('id') }}" />
                 <div class="intro-y box p-5">
                     <div class="input-form">
                         <label class="flex flex-col sm:flex-row">Даалгавар илгээх сүүлийн хугацаа</label>
-                        <input name="end" class="datepicker input w-56 border block" data-single-mode="true" /> 
+                        <input type="datetime-local" name="end" class="input w-56 border block" data-single-mode="true" /> 
                     </div>
-                    <div class="input-form">
+                    <div class="input-form mt-3">
                         <label class="flex flex-col sm:flex-row">
                             Гэрийн даалгавар: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Криллээр бичнэ</span>
                         </label>
                         <textarea name="aguulga" class="input w-full border mt-2"></textarea>
                     </div>
 
-                    <div class="input-form">
+                    <div class="input-form mt-3">
                         <div class="dropzone border-gray-200 border-dashed">
                             <div class="fallback">
                                 <input name="file" type="file" />

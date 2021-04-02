@@ -25,21 +25,21 @@
                             data-pristine-required-message="Гарчиг хоосон байж болохгүй" 
                             value="{{ $aguulga->sedev }}" />
                     </div>
-                    <div class="input-form">
+                    <div class="input-form mt-3">
                         <label class="flex flex-col sm:flex-row">
                             Товч тайлбар: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Криллээр бичнэ</span>
                         </label>
                         <textarea name="tailbar" class="input w-full border mt-2">{{ $aguulga->tailbar }}</textarea>
                     </div>
 
-                    <div class="input-form">
+                    <div class="input-form mt-3">
                         <label class="flex flex-col sm:flex-row">
                             Хичээлийн агуулга: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Криллээр бичнэ</span>
                         </label>
                         <textarea name="aguulga" class="input w-full border mt-2">{{ $aguulga->aguulga }}</textarea>
                     </div>
 
-                    <div class="input-form">
+                    <div class="input-form mt-3">
                         <div class="dropzone border-gray-200 border-dashed">
                             <div class="fallback">
                                 <input name="file" type="file" />

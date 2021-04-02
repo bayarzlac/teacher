@@ -49,7 +49,12 @@
                                     <a class="flex items-center mr-3" href="{{ route('aguulga-edit', $item->id) }}">
                                         <i data-feather="edit-2" class="w-4 h-4 mr-1"></i> Засах
                                     </a>
-                                    
+
+                                    <a class="flex items-center mr-3 text-theme-6 delete_button" href="javascript:;" data-id="{{ $item->id }}" 
+                                        data-target="#delete-confirmation-modal">
+                                        <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> {{ __('site.delete') }}
+                                    </a>
+                            
                                     @if ($item->d_id != null)
                                         <a class="flex items-center mr-3" href="{{ route('teacher-daalgavar', $item->d_id) }}">
                                             <i data-feather="home" class="w-4 h-4 mr-1"></i> Даалгавар
@@ -66,6 +71,24 @@
                 </tbody>
             </table>
             @endif
+        </div>
+    </div>
+
+    <div class="modal" id="delete-confirmation-modal">
+        <div class="modal__content">
+            <form action="{{ route('teacher-aguulga-delete-ajax') }}" method="post">
+            @csrf
+                <input type="hidden" class="t_id" name="t_id" value="">
+                <div class="p-5 text-center">
+                    <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">Сонгосон агуулгыг устгах уу?</div>
+                    <div class="text-gray-600 mt-2">Холбогдох даалгаврын хамт сэргээх боломжгүй устгагдахыг анхаарна уу!</div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">{{ __('site.cancel') }}</button>
+                    <button type="submit" class="modal_delete_button_tabulator button w-24 bg-theme-6 text-white">{{ __('site.delete') }}</button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection

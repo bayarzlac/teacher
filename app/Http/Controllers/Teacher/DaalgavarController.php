@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\File;
+
 use App\Models\Daalgavar;
 use App\Models\TsahimHicheel;
 
@@ -19,8 +21,7 @@ class DaalgavarController extends Controller
         $pageTitle = 'Гэрийн даалгавар';
         $pageName = 'daalgavar';
 
-        $daalgavar = Daalgavar::select('id', 'ts_id', 'end_time')->
-            where('ts_id', '=', $id)->get();
+        $daalgavar = Daalgavar::where('id', '=', $id)->first();
 
         $activeMenu = activeMenu($pageName);
 
@@ -58,12 +59,13 @@ class DaalgavarController extends Controller
 
         if ($request->hasFile('file'))
         {
-            $path = Storage::putFile('files', new File('/uploads/files'));
+            $path = $request->file('file')->store('uploads/' . strval($user->code));
         }
 
         $daalgavar = new Daalgavar;
         $daalgavar->ts_id = $request->ts_id;
         $daalgavar->end_time = $request->end;
+        $daalgavar->aguulga = $request->aguulga;
         $daalgavar->fileUrl = $path;
         $daalgavar->save();
 

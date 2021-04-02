@@ -86,6 +86,9 @@ Route::group(['prefix' => 'teacher','middleware' => 'teacherauth'], function () 
 
 	Route::post('aguulga/add', [AguulgaController::class, 'store'])->name('teacher-aguulga-save');
 	Route::post('aguulga/edit/{id}', [AguulgaController::class, 'update'])->name('teacher-aguulga-update');
+	Route::post('aguulga/delete/', [AguulgaController::class, 'delete'])->name('teacher-aguulga-delete-ajax');
+
+	Route::delete('aguulga/delete/{id}', [AguulgaController::class, 'destroy'])->name('teacher-aguulga-delete');
 
 	Route::get('daalgavar/{id}', [DaalgavarController::class, 'index'])->name('teacher-daalgavar');
 	Route::get('daalgavar/add/{id}', [DaalgavarController::class, 'add'])->name('teacher-daalgavar-add');
