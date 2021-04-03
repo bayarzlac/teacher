@@ -21,7 +21,10 @@ class DaalgavarController extends Controller
         $pageTitle = 'Гэрийн даалгавар';
         $pageName = 'daalgavar';
 
-        $daalgavar = Daalgavar::where('id', '=', $id)->first();
+        $daalgavar = Daalgavar::join('tsahim_hicheel', 'daalgavar.ts_id', '=', 'tsahim_hicheel.id')->
+            where('daalgavar.id', '=', $id)->
+            select('daalgavar.id as id', 'daalgavar.end_time', 'daalgavar.aguulga', 'daalgavar.fileUrl',
+                'tsahim_hicheel.sedev')->first();
 
         $activeMenu = activeMenu($pageName);
 

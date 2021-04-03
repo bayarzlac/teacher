@@ -39,13 +39,16 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="" class="font-medium whitespace-nowrap">{{ $item->sedev }}</a>
+                                <a href="{{ route('teacher-aguulga-preview', $item->id) }}" class="font-medium whitespace-nowrap">{{ $item->sedev }}</a>
                             </td>
                             <td class="text-center">
                                 {{ $item->tailbar }}
                             </td>
                             <td class="table-report__action w-72">
                                 <div class="flex justify-center items-center">
+                                    <a class="flex items-center mr-3" href="{{ route('teacher-aguulga-preview', $item->id) }}">
+                                        <i data-feather="eye" class="w-4 h-4 mr-1"></i> Харуулах
+                                    </a>
                                     <a class="flex items-center mr-3" href="{{ route('aguulga-edit', $item->id) }}">
                                         <i data-feather="edit-2" class="w-4 h-4 mr-1"></i> Засах
                                     </a>

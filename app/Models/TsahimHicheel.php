@@ -14,6 +14,7 @@ class TsahimHicheel extends Model
         'tailbar',
         'aguulga',
         'fileUrl',
-        'f_id'
+        'f_id',
+        'uzsen'
     ];
 }

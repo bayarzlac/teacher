@@ -34,7 +34,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="" class="font-medium whitespace-nowrap">{{ $item->ner }} {{ $item->course }}{{ $item->buleg }}</a>
+                                <a href="{{ route('teacher-aguulga', $item->id) }}" class="font-medium whitespace-nowrap">{{ $item->ner }} {{ $item->course }}{{ $item->buleg }}</a>
                             </td>
                             <td class="text-center">{{ $item->tsag }}</td>
                             <td class="table-report__action w-56">

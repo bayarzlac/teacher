@@ -81,12 +81,14 @@ Route::group(['prefix' => 'teacher','middleware' => 'teacherauth'], function () 
 	Route::get('hicheel', [HicheelController::class, 'index'])->name('teacher-hicheel');
 	
 	Route::get('aguulga/{id}', [AguulgaController::class, 'index'])->name('teacher-aguulga');
+	Route::get('aguulga/preview/{id}', [AguulgaController::class, 'preview'])->name('teacher-aguulga-preview');
 	Route::get('aguulga/add/{id}', [AguulgaController::class, 'add'])->name('teacher-aguulga-add');
 	Route::get('aguulga/edit/{id}', [AguulgaController::class, 'edit'])->name('aguulga-edit');
 
 	Route::post('aguulga/add', [AguulgaController::class, 'store'])->name('teacher-aguulga-save');
 	Route::post('aguulga/edit/{id}', [AguulgaController::class, 'update'])->name('teacher-aguulga-update');
 	Route::post('aguulga/delete/', [AguulgaController::class, 'delete'])->name('teacher-aguulga-delete-ajax');
+	Route::post('aguulga/comment/{id}', [AguulgaController::class, 'comment'])->name('teacher-aguulga-comment');
 
 	Route::delete('aguulga/delete/{id}', [AguulgaController::class, 'destroy'])->name('teacher-aguulga-delete');
 

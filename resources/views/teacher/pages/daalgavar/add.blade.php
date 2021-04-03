@@ -25,6 +25,7 @@
                             Гэрийн даалгавар: <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">Криллээр бичнэ</span>
                         </label>
                         <textarea name="aguulga" class="input w-full border mt-2"></textarea>
+
                     </div>
 
                     <div class="input-form mt-3">

@@ -11,6 +11,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\TsahimHicheel;
+use App\Models\TsahimHicheelComments;
 use App\Models\Fond;
 use App\Models\Daalgavar;
 
@@ -34,6 +35,41 @@ class AguulgaController extends Controller
             'aguulga' => $aguulga,
             'user' => Auth::guard('teacher')->user()
         ]);
+    }
+
+    public function preview($id)
+    {
+        $user = Auth::guard('teacher')->user();
+
+        $pageTitle = 'Хичээлийн агуулга';
+        $pageName = 'aguulga';
+        
+        $activeMenu = activeMenu($pageName);
+
+        $aguulga = TsahimHicheel::where('id', '=', $id)->first();
+        $comments = TsahimHicheelComments::where('ts_id', '=', $id)->get();
+
+        return view('teacher/pages/'.$pageName.'/preview', [
+            'first_page_name' => $activeMenu['first_page_name'],
+            'page_title' => $pageTitle,
+            'page_name' => $pageName,
+            'aguulga' => $aguulga,
+            'comments' => $comments,
+            'user' => $user
+        ]);
+    }
+
+    public function comment(Request $request)
+    {
+        $user = Auth::guard('teacher')->user();
+
+        $comment = new TsahimHicheelComments;
+        $comment->ts_id = $request->id;
+        $comment->name = $user->Str::substr($user->ovog, 0, 3) . '.' . $user->ner;
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        return redirect()->route('teacher-aguulga-preview', [$request->id]);
     }
 
     public function add($id)
